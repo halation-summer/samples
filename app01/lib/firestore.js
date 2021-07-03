@@ -2,13 +2,12 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyD6R5qaA9-rsIVPDEJxKfxmNzXt5MSzuSY",
-  authDomain: "app01-53333.firebaseapp.com",
-  projectId: "app01-53333",
-  storageBucket: "app01-53333.appspot.com",
-  messagingSenderId: "274655581674",
-  appId: "1:274655581674:web:927706a9d39ef7783bce93",
-  measurementId: "G-W2BBKK6M6Q"
+  apiKey: "AIzaSyAdIpvxKkmACERuh2_FdfI6zo7Ki3Dd_RQ",
+  authDomain: "sample01-5fad1.firebaseapp.com",
+  projectId: "sample01-5fad1",
+  storageBucket: "sample01-5fad1.appspot.com",
+  messagingSenderId: "710609583806",
+  appId: "1:710609583806:web:690c92dbfa98cf1ce868ef"
 };
 
 if (firebase.apps.length === 0) {
@@ -16,7 +15,3 @@ if (firebase.apps.length === 0) {
 }
 const firestore = firebase.firestore()
 export default firestore
-
-
-
-
