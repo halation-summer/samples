@@ -4,7 +4,7 @@ import { addChildAc } from "stores/child/action-creator";
 import { callToast } from 'lib/toast';
 import { getChildrenApi } from 'stores/child/api-accessor'
 
-export default function childForm() {
+export default function ChildForm() {
   const kanjiRef = useRef('')
   const kanaRef = useRef('')
   const [sexState, setSexState] = useState('boy')

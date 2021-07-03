@@ -22,7 +22,8 @@ export const callToast = message => {
   toast(message)
 }
 
-export default {
+const obj = {
   ToastCont,
   callToast
 }
+export default obj
