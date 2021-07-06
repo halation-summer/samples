@@ -1,14 +1,14 @@
 import { useSelector } from "react-redux";
-import { deleteChildAc } from "stores/child/action-creator";
-import { Child } from "stores/child/entity";
-import { RootState } from "stores/child/store";
+import * as operation from "ducks/child/operation";
+import { Child } from "ducks/child/entity";
+import { selectChildren } from "ducks/child/selector";
 import { callToast } from 'lib/toast';
 
 export default function ChildList() {
-  const children = useSelector((state: RootState) => state.children);
+  const children = useSelector(selectChildren);
 
   const handleDelete = async (targetChild: Child) => {
-    await deleteChildAc(targetChild)
+    await operation.deleteChild(targetChild)
     callToast('削除しました。')
   }
 
@@ -23,7 +23,7 @@ export default function ChildList() {
         </tr>
       </thead>
       <tbody>
-        {children.map((child, index) => (
+        {children.map((child: Child, index: number) => (
         <tr key={index} className={child.getRowColor()}>
           <td className="align-middle">{child.getSexSymbol()}</td>
           <td className="align-middle">{child.kanji}</td>

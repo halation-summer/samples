@@ -1,8 +1,8 @@
-import { Child } from "stores/child/entity";
+import { Child } from "ducks/child/entity";
 import { SyntheticEvent, useRef, useState } from "react";
-import { addChildAc } from "stores/child/action-creator";
+import * as operation from "ducks/child/operation";
 import { callToast } from 'lib/toast';
-import { getChildrenApi } from 'stores/child/api-accessor'
+import * as api from 'ducks/child/api'
 
 export default function ChildForm() {
   const kanjiRef = useRef<HTMLInputElement>(null)
@@ -10,20 +10,15 @@ export default function ChildForm() {
   const [sexState, setSexState] = useState('boy')
 
   const handleChange = (e: SyntheticEvent) => {
-    console.log(e)
     setSexState((e.target as HTMLInputElement).value)
   }
 
   const handleClick = async () => {
-
-console.log(kanjiRef)
-console.log(kanjiRef.current)
-
     if (!kanjiRef.current?.value || !kanaRef.current?.value) {
       alert('未入力の項目があります。')
       return
     }
-    const children = await getChildrenApi()
+    const children = await api.getChildren()
     if (children.length >= 10) {
       alert('10個まで登録できます。')
       return
@@ -36,7 +31,7 @@ console.log(kanjiRef.current)
       sex: sexState,
       date: new Date()
     })
-    await addChildAc(newChild)
+    await operation.addChild(newChild)
 
     // 初期化
     kanjiRef.current.value = ''

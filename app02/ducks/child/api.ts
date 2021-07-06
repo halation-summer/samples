@@ -1,7 +1,7 @@
 import firestore from 'lib/firestore'
-import { Child } from 'stores/child/entity'
+import { Child } from 'ducks/child/entity'
 
-export const getChildrenApi = async () => {
+export const getChildren = async () => {
   const querySnapshot = await firestore.collection('children').orderBy('date', 'asc').get()
   let children: Child[] = []
   querySnapshot.forEach(doc => {
@@ -17,18 +17,12 @@ export const getChildrenApi = async () => {
   return children
 }
 
-export const addChildApi = async (newChild: Child) => {
-  const docRef = await firestore.collection('children').add(newChild.getApiFmtData())
+export const addChild = async (newChild: Child) => {
+  const docRef = await firestore.collection('children').add(newChild.getOutput())
   return docRef.id
 }
 
-export const deleteChildApi = async (targetChild: Child) => {
+export const deleteChild = async (targetChild: Child) => {
   const result = await firestore.collection('children').doc(targetChild.id).delete()
   return result
-}
-
-export default {
-  getChildrenApi,
-  addChildApi,
-  deleteChildApi,
 }

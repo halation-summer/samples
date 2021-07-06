@@ -39,7 +39,7 @@ export class Child {
   getRowColor(): string {
     return 'table-success'
   }
-  getApiFmtData(): ChildOutput {
+  getOutput(): ChildOutput {
     return {
       kanji: this.kanji,
       kana: this.kana,
