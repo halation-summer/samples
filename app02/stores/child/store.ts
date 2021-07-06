@@ -1,7 +1,12 @@
 import reducer from 'stores/child/reducer'
+import { Child } from 'stores/child/entity'
 import { createStore } from "redux";
 
-const initialState = {
+export interface RootState {
+  children: Child[]
+}
+
+const initialState: RootState = {
   children: []
 }
 

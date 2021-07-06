@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
 import { deleteChildAc } from "stores/child/action-creator";
+import { Child } from "stores/child/entity";
+import { RootState } from "stores/child/store";
 import { callToast } from 'lib/toast';
 
 export default function ChildList() {
-  const children = useSelector(state => state.children);
+  const children = useSelector((state: RootState) => state.children);
 
-  const handleDelete = async targetChild => {
+  const handleDelete = async (targetChild: Child) => {
     await deleteChildAc(targetChild)
     callToast('削除しました。')
   }

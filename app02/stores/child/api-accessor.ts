@@ -3,7 +3,7 @@ import { Child } from 'stores/child/entity'
 
 export const getChildrenApi = async () => {
   const querySnapshot = await firestore.collection('children').orderBy('date', 'asc').get()
-  let children = []
+  let children: Child[] = []
   querySnapshot.forEach(doc => {
     const newChild = Child.createIns({
       kanji: doc.data().kanji,
@@ -17,12 +17,12 @@ export const getChildrenApi = async () => {
   return children
 }
 
-export const addChildApi = async (newChild) => {
+export const addChildApi = async (newChild: Child) => {
   const docRef = await firestore.collection('children').add(newChild.getApiFmtData())
   return docRef.id
 }
 
-export const deleteChildApi = async (targetChild) => {
+export const deleteChildApi = async (targetChild: Child) => {
   const result = await firestore.collection('children').doc(targetChild.id).delete()
   return result
 }

@@ -1,20 +1,25 @@
 import { Child } from "stores/child/entity";
-import { useRef, useState } from "react";
+import { SyntheticEvent, useRef, useState } from "react";
 import { addChildAc } from "stores/child/action-creator";
 import { callToast } from 'lib/toast';
 import { getChildrenApi } from 'stores/child/api-accessor'
 
 export default function ChildForm() {
-  const kanjiRef = useRef('')
-  const kanaRef = useRef('')
+  const kanjiRef = useRef<HTMLInputElement>(null)
+  const kanaRef = useRef<HTMLInputElement>(null)
   const [sexState, setSexState] = useState('boy')
 
-  const handleChange = e => {
-    setSexState(e.target.value)
+  const handleChange = (e: SyntheticEvent) => {
+    console.log(e)
+    setSexState((e.target as HTMLInputElement).value)
   }
 
   const handleClick = async () => {
-    if (kanjiRef.current.value === '' || kanaRef.current.value === '') {
+
+console.log(kanjiRef)
+console.log(kanjiRef.current)
+
+    if (!kanjiRef.current?.value || !kanaRef.current?.value) {
       alert('未入力の項目があります。')
       return
     }
@@ -25,6 +30,7 @@ export default function ChildForm() {
     }
 
     const newChild = Child.createIns({
+      id: '',
       kanji: kanjiRef.current.value,
       kana: kanaRef.current.value,
       sex: sexState,

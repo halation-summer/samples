@@ -1,6 +1,6 @@
-const reducer = (state, action) => {
+const reducer = (state: any, action: any) => {
   switch (action.type) {
-    case 'setAction':
+    case 'setting':
       return { children: action.children }
   }
   return state

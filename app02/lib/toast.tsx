@@ -18,7 +18,7 @@ export const ToastCont = () => {
   )
 }
 
-export const callToast = message => {
+export const callToast = (message: string) => {
   toast(message)
 }
 
