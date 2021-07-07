@@ -1,4 +1,3 @@
-import { Child } from "ducks/child/entity";
 import { SyntheticEvent, useRef, useState } from "react";
 import * as operation from "ducks/child/operation";
 import { callToast } from 'lib/toast';
@@ -24,13 +23,13 @@ export default function ChildForm() {
       return
     }
 
-    const newChild = Child.createIns({
+    const newChild = {
       id: '',
       kanji: kanjiRef.current.value,
       kana: kanaRef.current.value,
       sex: sexState,
-      date: new Date()
-    })
+      timestamp: Date.now()
+    }
     await operation.addChild(newChild)
 
     // 初期化

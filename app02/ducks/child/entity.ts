@@ -1,55 +1,58 @@
-export interface ChildInput {
+export interface Child {
   id: string,
   kanji: string,
   kana: string,
   sex: string,
-  date: Date
+  timestamp: number
 }
 
 export interface ChildOutput {
   kanji: string,
   kana: string,
   sex: string,
-  date: Date
+  timestamp: number
 }
 
-export class Child {
+export class SuperChild {
   kanji: string
   kana: string
   sex: string
   id: string
-  date: Date
+  timestamp: number
 
-  constructor(obj: ChildInput) {
+  constructor(obj: Child) {
     this.kanji = obj.kanji
     this.kana = obj.kana
     this.sex = obj.sex
     this.id = obj.id
-    this.date = obj.date
+    this.timestamp = obj.timestamp
   }
 
-  static createIns(obj: ChildInput): Child {
+  static factory(obj: Child) {
     if (obj.sex === 'boy') return new Boy(obj)
     if (obj.sex === 'girl') return new Girl(obj)
-    return new Child(obj)
+    return new SuperChild(obj)
   }
+
   getSexSymbol(): string {
     return '?'
   }
+
   getRowColor(): string {
     return 'table-success'
   }
+
   getOutput(): ChildOutput {
     return {
       kanji: this.kanji,
       kana: this.kana,
       sex: this.sex,
-      date: this.date,
+      timestamp: this.timestamp,
     }
   }
 }
 
-class Boy extends Child {
+class Boy extends SuperChild {
   getSexSymbol(): string {
     return '♂'
   }
@@ -58,7 +61,7 @@ class Boy extends Child {
   }
 }
 
-class Girl extends Child {
+class Girl extends SuperChild {
   getSexSymbol(): string {
     return '♀'
   }

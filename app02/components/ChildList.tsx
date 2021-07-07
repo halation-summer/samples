@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import * as operation from "ducks/child/operation";
-import { Child } from "ducks/child/entity";
+import { Child, SuperChild } from "ducks/child/entity";
 import { selectChildren } from "ducks/child/selector";
 import { callToast } from 'lib/toast';
 
@@ -24,8 +24,8 @@ export default function ChildList() {
       </thead>
       <tbody>
         {children.map((child: Child, index: number) => (
-        <tr key={index} className={child.getRowColor()}>
-          <td className="align-middle">{child.getSexSymbol()}</td>
+        <tr key={index} className={SuperChild.factory(child).getRowColor()}>
+          <td className="align-middle">{SuperChild.factory(child).getSexSymbol()}</td>
           <td className="align-middle">{child.kanji}</td>
           <td className="align-middle">{child.kana}</td>
           <td style={{border: 'none', backgroundColor: 'white'}}>

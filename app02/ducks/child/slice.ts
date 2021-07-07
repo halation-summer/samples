@@ -14,8 +14,6 @@ const slice = createSlice({
   initialState,
   reducers: {
     setChildren(state, action: PayloadAction<Child[]>) {
-      console.log(action)
-      console.log(action.payload)
       state.children = action.payload
     },
   },

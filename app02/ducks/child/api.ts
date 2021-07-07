@@ -1,24 +1,24 @@
 import firestore from 'lib/firestore'
-import { Child } from 'ducks/child/entity'
+import { Child, SuperChild } from 'ducks/child/entity'
 
 export const getChildren = async () => {
-  const querySnapshot = await firestore.collection('children').orderBy('date', 'asc').get()
+  const querySnapshot = await firestore.collection('children').orderBy('timestamp', 'asc').get()
   let children: Child[] = []
   querySnapshot.forEach(doc => {
-    const newChild = Child.createIns({
+    const newChild = {
       kanji: doc.data().kanji,
       kana: doc.data().kana,
       sex: doc.data().sex,
       id: doc.id,
-      date: doc.data().date,
-    })
+      timestamp: doc.data().timestamp,
+    }
     children.push(newChild)
   })
   return children
 }
 
 export const addChild = async (newChild: Child) => {
-  const docRef = await firestore.collection('children').add(newChild.getOutput())
+  const docRef = await firestore.collection('children').add(SuperChild.factory(newChild).getOutput())
   return docRef.id
 }
 
