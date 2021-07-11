@@ -5,9 +5,11 @@ import { callToast } from 'lib/toast';
 export default function ChildList() {
   const children = useSelector(state => state.children);
 
+  // 削除ボタン押下時の制御
   const handleDelete = async targetChild => {
     if (window.confirm('削除しますか？') === false) return
 
+    // 子供データの削除
     try {
       await deleteChildAc(targetChild)
     } catch(err) {
@@ -43,7 +45,3 @@ export default function ChildList() {
     </table>
   );
 }
-
-
-
-

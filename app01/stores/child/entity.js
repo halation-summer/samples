@@ -1,3 +1,4 @@
+// 子供クラス
 export class Child {
   constructor(obj) {
     this.kanji = obj.kanji ?? ''
@@ -27,6 +28,7 @@ export class Child {
   }
 }
 
+// 男の子クラス
 class Boy extends Child {
   getSexSymbol() {
     return '♂'
@@ -36,6 +38,7 @@ class Boy extends Child {
   }
 }
 
+// 女の子クラス
 class Girl extends Child {
   getSexSymbol() {
     return '♀'

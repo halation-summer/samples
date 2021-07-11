@@ -9,6 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { ToastCont } from 'lib/toast';
 
 export default function Home() {
+  // 初期表示用のデータ取得
   useEffect(() => {
     (async () => {
       try {

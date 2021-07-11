@@ -9,16 +9,20 @@ export default function ChildForm() {
   const kanaRef = useRef('')
   const [sexState, setSexState] = useState('boy')
 
+  // 性別ラジオボタンの制御
   const handleChange = e => {
     setSexState(e.target.value)
   }
 
+  // 名前追加ボタン押下時の制御
   const handleClick = async () => {
+    // 検証
     if (kanjiRef.current.value === '' || kanaRef.current.value === '') {
       alert('未入力の項目があります。')
       return
     }
 
+    // 子供データの取得
     let children
     try {
       children = await getChildrenApi()
@@ -27,18 +31,19 @@ export default function ChildForm() {
       return
     }
 
+    // 検証
     if (children.length >= 10) {
       alert('10個まで登録できます。')
       return
     }
 
+    // 子供データの追加
     const newChild = Child.createIns({
       kanji: kanjiRef.current.value,
       kana: kanaRef.current.value,
       sex: sexState,
       date: new Date()
     })
-
     try {
       await addChildAc(newChild)
     } catch(err) {
@@ -46,7 +51,7 @@ export default function ChildForm() {
       return
     }
 
-    // 初期化
+    // フォームの初期化
     kanjiRef.current.value = ''
     kanaRef.current.value = ''
     setSexState('boy')
