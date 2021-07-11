@@ -3,6 +3,7 @@ import { Child } from 'stores/child/entity'
 
 export const getChildrenApi = async () => {
   const querySnapshot = await firestore.collection('children').orderBy('date', 'asc').get()
+  .catch(() => { throw 'データの取得に失敗しました。' })
   let children = []
   querySnapshot.forEach(doc => {
     const newChild = Child.createIns({
@@ -18,13 +19,13 @@ export const getChildrenApi = async () => {
 }
 
 export const addChildApi = async (newChild) => {
-  const docRef = await firestore.collection('children').add(newChild.getApiFmtData())
-  return docRef.id
+  await firestore.collection('children').add(newChild.getApiFmtData())
+  .catch(() => { throw 'データの追加に失敗しました。' })
 }
 
 export const deleteChildApi = async (targetChild) => {
-  const result = await firestore.collection('children').doc(targetChild.id).delete()
-  return result
+  await firestore.collection('children').doc(targetChild.id).delete()
+  .catch(() => { throw 'データの削除に失敗しました。' })
 }
 
 export default {
@@ -32,3 +33,8 @@ export default {
   addChildApi,
   deleteChildApi,
 }
+
+/* for test */
+// function getRejection() {
+//   return Promise.reject()
+// }

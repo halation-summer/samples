@@ -18,7 +18,15 @@ export default function ChildForm() {
       alert('未入力の項目があります。')
       return
     }
-    const children = await getChildrenApi()
+
+    let children
+    try {
+      children = await getChildrenApi()
+    } catch(err) {
+      alert(err)
+      return
+    }
+
     if (children.length >= 10) {
       alert('10個まで登録できます。')
       return
@@ -30,7 +38,13 @@ export default function ChildForm() {
       sex: sexState,
       date: new Date()
     })
-    await addChildAc(newChild)
+
+    try {
+      await addChildAc(newChild)
+    } catch(err) {
+      alert(err)
+      return
+    }
 
     // 初期化
     kanjiRef.current.value = ''

@@ -6,7 +6,15 @@ export default function ChildList() {
   const children = useSelector(state => state.children);
 
   const handleDelete = async targetChild => {
-    await deleteChildAc(targetChild)
+    if (window.confirm('削除しますか？') === false) return
+
+    try {
+      await deleteChildAc(targetChild)
+    } catch(err) {
+      alert(err)
+      return
+    }
+
     callToast('削除しました。')
   }
 
